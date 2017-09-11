@@ -5,13 +5,9 @@ public class MazeSolver {
 
 	public static void main(String[] args) {
 		Scanner keyboard=new Scanner(System.in);
-
 		boolean goodFileName=false;
-		boolean correctSize=false;
-		boolean mazeSolved=false;
 		String fileName;
-		int[][]theMaze=new int[15][15];
-		
+		int[][]theMaze=new int[15][15];		
 
 		System.out.println("Please enter a file containing only a 15x15 matrix: ");	//user prompt
 		fileName=keyboard.nextLine();
@@ -37,16 +33,12 @@ public class MazeSolver {
 				System.out.print("Please enter a file containing only a 15x15 matrix: ");
 				fileName=keyboard.nextLine();
 			}
-
 		}//end while
 		
 		//now we have loaded the file, lets try and solve the maze
-		mazeSolved=MazeOperations.traverseMaze(theMaze,0,0);
+		MazeOperations.traverseMaze(theMaze,0,0);
 		MazeOperations.printMaze(theMaze);
-		
-
 	}
-
 }
 
 
