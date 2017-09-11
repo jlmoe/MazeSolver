@@ -48,14 +48,32 @@ import java.util.*;
  * 					->false -> go to next direct, if there is no next direct, return false
  */
 public class MazeOperations {
-public boolean traverseMaze(int [][] maze, int row, int column){
+	
+	
+	// we can assume 15X15 array
+	public static void printMaze(int[][] theMaze){
+		int row=0;
+		int column = 0;
+		
+		for(row=0;row<15;row++){
+			for(column=0;column<15;column++){
+				System.out.print(theMaze[row][column]+ " ");
+			}
+			System.out.println();
+		}
+	}
+	
+
+
+
+	public static boolean traverseMaze(int [][] maze, int row, int column){
 		
 		boolean result=false;
 		if(row==14&&column==14){	//check to see if it is the end
 			maze[row][column]=7;
 			result=true;
 		}
-		
+
 		else if(validSquare(maze,row,column)){//check if maze is a valid square
 			maze[row][column]=3;
 			
@@ -64,7 +82,7 @@ public boolean traverseMaze(int [][] maze, int row, int column){
 			//If the function did return true, we know we have found the base case, so we make the result true so we can backtrack
 			//to the correct square and confirm they are also true, causing the stack to collapse to main.
 			if(down(maze,row,column)){	//move down if possible
-										//when this is true, we break out of the if/else chain
+				//when this is true, we break out of the if/else chain
 				result=true;	//base case found! return true
 			}
 			else if(right(maze,row,column)){	//move right if possible
@@ -86,12 +104,14 @@ public boolean traverseMaze(int [][] maze, int row, int column){
 		else{
 			result = false;	//backtrack to previous square because this square is invalid
 		}
+		if(row==0&&column==0){//if we are at the first activation
+			maze[row][column]=7;
+		}
 		return result;	//backtrack to previous call
 	}
-	public int[][] fillMaze(int[][] theMaze, Scanner inputFile){
+	public static int[][] fillMaze(int[][] theMaze, Scanner inputFile){
 		int row=0;
 		int column=0;
-		boolean validSize=false;
 		while(inputFile.hasNextInt()){
 			if(row<15){//make sure the file is not overflowing with too many integers
 				theMaze[row][column]=inputFile.nextInt();
@@ -107,27 +127,27 @@ public boolean traverseMaze(int [][] maze, int row, int column){
 		}
 		row=0;
 		column=0;
-		
+
 		return theMaze;
 	}
-	
+
 
 
 
 
 	//these functions make this type of recursion indirect
-	private boolean down(int [][] maze, int row, int column){	//try to move down
-		
+	private static boolean down(int [][] maze, int row, int column){	//try to move down
+
 		boolean result=false;
-		
+
 		if(traverseMaze(maze,row+1,column)==true){	//if this is the correct path
 			maze[row+1][column]=7;	//mark as correct path
 			result=true;	//base case found! return true
 		}
 		return result;
 	}
-	private boolean right(int [][] maze, int row, int column){	//try to move right
-		
+	private static boolean right(int [][] maze, int row, int column){	//try to move right
+
 		boolean result=false;
 		if(traverseMaze(maze,row,column+1)==true){	//if this is the correct path
 			maze[row][column+1]=7;//mark as correct path
@@ -135,8 +155,8 @@ public boolean traverseMaze(int [][] maze, int row, int column){
 		}
 		return result;
 	}
-	private boolean up(int [][] maze, int row, int column){	//try to move up
-		
+	private static boolean up(int [][] maze, int row, int column){	//try to move up
+
 		boolean result=false;
 		if(traverseMaze(maze,row-1,column)==true){	//if this is the correct path
 			maze[row-1][column]=7;//mark as correct path
@@ -144,8 +164,8 @@ public boolean traverseMaze(int [][] maze, int row, int column){
 		}
 		return result;
 	}
-	
-	private boolean left(int [][] maze, int row, int column){	//try to move left
+
+	private static boolean left(int [][] maze, int row, int column){	//try to move left
 		boolean result=false;
 		if(traverseMaze(maze,row,column-1)==true){
 			maze[row][column-1]=7;//mark as correct path
@@ -153,8 +173,8 @@ public boolean traverseMaze(int [][] maze, int row, int column){
 		}
 		return result;
 	}
-	
-	private boolean validSquare(int [][] maze, int row, int column){
+
+	private static boolean validSquare(int [][] maze, int row, int column){
 		boolean result=false;
 		if(row<15 && column<15 && row>-1 && column>-1){//check if maze is in bounds
 			if(maze[row][column]!=0 && maze[row][column] !=3){	//if it is a free square
