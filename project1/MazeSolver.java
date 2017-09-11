@@ -1,3 +1,16 @@
+/**
+ * Name: Jeffrey Moe
+ * Project: Project 1
+ * Class: CS 111-001
+ * Purpose: Solve a 15x15 maze recieved thorugh a file input
+ * 			The classes include:
+ * 			MazeSolver-This class contains the main method and is used to read in a file
+ * 			and call the functions within MazeOperations to solve the problem
+ * 			MazeOperations- This class contains much of the functionality of the program.
+ * 			It features a recursive algorithm to solve the maze (more info within the class file)
+ * 			as well as printing the maze and filling the maze with data.
+ **/
+
 package project1;
 import java.util.*;
 import java.io.*;
