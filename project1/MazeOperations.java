@@ -142,11 +142,8 @@ public class MazeOperations {
 				row++;
 			}
 		}
-		if(row < 14 || column < 14){//prevents underfill
+		if(row < != 15 || column != 0){//prevents underfill
 			throw new RuntimeException("YOU HAVE NOT ENOUGH ITEMS");
-		row = 0;
-		column = 0;
-
 		return theMaze;
 	}
 
