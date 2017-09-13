@@ -1,13 +1,12 @@
 /**
-  *Name: Jeffrey Moe
-  *Project 1
-  *CS 111-001
-  *September 13, 2017
-**/
+ *Name: Jeffrey Moe
+ *Project 1
+ *CS 111-001
+ *September 13, 2017
+ **/
 
 
 package project1;
-import java.io.FileReader;
 import java.util.*;
 /*
  *PURPOSE
@@ -32,7 +31,7 @@ import java.util.*;
  *
  *The class MazeOperations also contains a few more functions, namely printMaze and fillMaze.
  *printMaze displays the 15x15 maze in the console.
- *fillMaze recieves a file to read and fills up a 15x15 array.
+ *fillMaze receives a file to read and fills up a 15x15 array.
  *
  *The fillMaze may throw an exception in which there is not sufficient data to fill the maze entirely, or if the data is 
  * too much for the array to handle.
@@ -40,13 +39,13 @@ import java.util.*;
 
 
 public class MazeOperations {
-	
-	
+
+
 	// we can assume 15X15 array
 	public static void printMaze(int[][] theMaze){
 		int row = 0;
 		int column = 0;
-		
+
 		for(row = 0; row < 15; row++){
 			for(column = 0; column < 15; column++){
 				System.out.print(theMaze[row][column] + " ");//print out element by element
@@ -54,36 +53,36 @@ public class MazeOperations {
 			System.out.println();
 		}
 	}
-	
 
-/******************************************
- * BASIC CONTROL STRUCTURE OF traverseMaze*
- ******************************************/
 
-/*
- * ->method call
- * ->boolean END
- * ->if row,column=(14,14)
- * 		->True-> set square to 7, return true
- * 		->False-> if !=visited,!=outofbounds,!=0
- * 				->set the position as marked
- * 				->check down, right,up,left
- * 					** This order is specified as the general direction the maze
- * 					** is traversed is down and right. This provides a good chance 
- * 					** the maze will be solved more quickly
- * 					
- * 					** Checking each direct calls the travel method recursively, therefore, the only way it will backtrack
- * 					** is if a the method highest on the stack returns false, causing the position to backtrack to the previous
- * 					** position, in which it will either continue checking or backtrack further.
- * 					** Returning true will also cause the stack to backtrack, however, because the only way to get true for any result
- * 					** is by reaching the base case, the stack will collapse backwards on the correct path of the maze, simultaneously
- * 					** marking the correct path
- * 				 -> if true -> set as correct path, return true
- * 					->false -> go to next direct, if there is no next direct, return false
- */
+	/******************************************
+	 * BASIC CONTROL STRUCTURE OF traverseMaze*
+	 ******************************************/
+
+	/*
+	 * ->method call
+	 * ->boolean END
+	 * ->if row,column=(14,14)
+	 * 		->True-> set square to 7, return true
+	 * 		->False-> if !=visited,!=outofbounds,!=0
+	 * 				->set the position as marked
+	 * 				->check down, right,up,left
+	 * 					** This order is specified as the general direction the maze
+	 * 					** is traversed is down and right. This provides a good chance 
+	 * 					** the maze will be solved more quickly
+	 * 					
+	 * 					** Checking each direct calls the travel method recursively, therefore, the only way it will backtrack
+	 * 					** is if a the method highest on the stack returns false, causing the position to backtrack to the previous
+	 * 					** position, in which it will either continue checking or backtrack further.
+	 * 					** Returning true will also cause the stack to backtrack, however, because the only way to get true for any result
+	 * 					** is by reaching the base case, the stack will collapse backwards on the correct path of the maze, simultaneously
+	 * 					** marking the correct path
+	 * 				 -> if true -> set as correct path, return true
+	 * 					->false -> go to next direct, if there is no next direct, return false
+	 */
 
 	public static boolean traverseMaze(int [][] maze, int row, int column){
-		
+
 		boolean result = false;
 		if(row == 14 && column == 14){	//check to see if it is the end
 			maze[row][column] = 7;
@@ -92,13 +91,13 @@ public class MazeOperations {
 
 		else if(validSquare(maze, row, column)){//check if maze is a valid square
 			maze[row][column] = 3;
-			
+
 			//This chain of if and else if statements check each direction, if it finds a direction that is true,
 			//the function it calls will set the maze location to 7 and return back here.
 			//If the function did return true, we know we have found the base case, 
 			//so we make the result true so we can backtrack
 			//to the correct square and confirm they are also true, causing the stack to collapse to main.
-			
+
 			if(down(maze, row, column)){	//move down if possible
 				result = true;	//base case found! return true
 			}
@@ -142,8 +141,13 @@ public class MazeOperations {
 				row++;
 			}
 		}
-		if(row < != 15 || column != 0){//prevents underfill
-			throw new RuntimeException("YOU HAVE NOT ENOUGH ITEMS");
+		if(row != 15 && column != 0){
+			throw new RuntimeException("YOU HAVE NOT ENOUGH ITEMS!");
+		}
+
+		row = 0;
+		column = 0;
+
 		return theMaze;
 	}
 
