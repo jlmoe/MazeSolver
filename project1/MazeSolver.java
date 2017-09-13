@@ -29,8 +29,8 @@ public class MazeSolver {
 		String fileName;
 		int[][]theMaze = new int[15][15];		
 
-		System.out.println("Please enter a file containing only a 15x15 matrix: ");	//user prompt
-		fileName=keyboard.nextLine();
+		System.out.print("Please enter a file containing only a 15x15 matrix: ");	//user prompt
+		fileName = keyboard.nextLine();
 
 		while(!goodFileName){	//runs as long as the file is incorrect
 			try{
@@ -44,6 +44,7 @@ public class MazeSolver {
 				catch(RuntimeException r){
 					System.out.println("This array is not the right size!");
 					System.out.print("Please enter a file containing only a 15x15 matrix: ");	
+					fileName = keyboard.nextLine();
 				}	
 				//by this point we know the file exists
 				//now we check to see if the array is the required size
